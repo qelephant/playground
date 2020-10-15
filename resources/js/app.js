@@ -4,10 +4,12 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 import vuetify from './vuetify'
+import store from './store'
 
 require('./bootstrap');
 
 window.Vue = require('vue');
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -30,5 +32,6 @@ Vue.component('app-component', require('./components/AppComponent.vue').default)
 
 const app = new Vue({
     vuetify,
+    store,
     el: '#app',
 });
