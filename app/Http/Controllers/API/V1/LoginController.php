@@ -4,24 +4,24 @@ namespace App\Http\Controllers\API\V1;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
     public function login(Request $request)
     {
-        $login = $request->validate([
-            'email' => 'required|string',
-            'passport' => 'required|string'
+
+        $loginData = $request->validate([
+            'email' => 'email|required',
+            'password' => 'required'
         ]);
 
-        if(!Auth::attempt($login)){
-            return response(['message' => 'Invalid login credentials!']);
+        if (!auth()->attempt($loginData)) {
+            return response(['message' => 'Invalid Credentials']);
         }
 
-        $accessToken = Auth::user()->createToken('authToken')->accessToken;
+        $accessToken = auth()->user()->createToken('authToken')->accessToken;
 
-        return response(['user'=> Auth::user(), 'access_token' => $accessToken]);
+        return response(['user' => auth()->user(), 'access_token' => $accessToken]);
 
     }
 }
