@@ -20,4 +20,6 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('user')->group( function() {
     Route::post('/login', 'API\V1\LoginController@login');
     Route::middleware('auth:api')->get('/all', 'API\V1\UserController@index');
+    Route::middleware('auth:api')->get('/current', 'API\V1\UserController@currentUser');
+
 });

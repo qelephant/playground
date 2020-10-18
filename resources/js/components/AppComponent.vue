@@ -97,6 +97,11 @@
         'Updates',
       ],
     }),
+    created(){
+          axios.defaults.headers.common['Authorization'] = "Bearer " + localStorage.getItem('blog_token');
+          this.$store.dispatch('currentUser/getUser');
+          
+    },
     methods: {
         logout(){
             axios.post('/logout')
@@ -104,6 +109,6 @@
                 window.location.href = "login"
             })
         }
-    }
+    },
   }
 </script>
